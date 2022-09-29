@@ -6,14 +6,14 @@ These benchmarks use Nginx in a docker container to serve static files of severa
 
 **Versions Tested**
 
-- `node@11.10.0`
-- `axios@0.18.0`
-- `got@9.6.0`
-- `superagent@5.0.5`
-- `isomorphic-fetch@2.2.1`
-- `node-fetch@2.5.0`
-- `ky@0.10.0`
-- `ky-universal@0.2.0`
+- `node@14.x`
+- `axios@0.27.2`
+- `got@11.8.3`
+- `superagent@8.0.0`
+- `isomorphic-fetch@3.0.0`
+- `node-fetch@2.6.7`
+- `undici@5.10.0`
+- `fetch-h2@3.0.2`
 
 ## Usage
 

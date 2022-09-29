@@ -8,9 +8,9 @@ const got = require('got')
 const nodeFetch = require('node-fetch')
 const isomorphicFetch = require('isomorphic-fetch')
 const superagent = require('superagent')
-const ky = require('ky-universal')
-const request = require('request')
 const { Agent } = require('http')
+const undici = require('undici')
+const fetchH2 = require('fetch-h2')
 
 const badDataError = new Error('ERROR: incorrect data')
 
@@ -176,34 +176,39 @@ const addTestCases = (suite, options) => {
     }
   })
 
-  suite.add('ky-universal', {
+  suite.add('undici', {
     defer: true,
-    fn: async defer => {
-      try {
-        const response = await ky(options.uri)
-        const text = await response.text()
-        if (text === fixtures[options.size]) {
-          return defer.resolve()
-        }
-        throw badDataError
-      } catch (err) {
-        throw err
-      }
+    fn: defer => {
+      return undici
+        .request(options.uri)
+        .then(response => response.body.text())
+        .then(text => {
+          if (text === fixtures[options.size]) {
+            return defer.resolve()
+          }
+          throw badDataError
+        })
+        .catch(err => {
+          throw err
+        })
     }
   })
 
-  suite.add('request', {
+  suite.add('fetch-h2', {
     defer: true,
     fn: defer => {
-      return request(options.uri,function(error, response, body) {
-        if (error) {
-          throw error
-        }
-        if (body === fixtures[options.size]) {
-          return defer.resolve()
-        }
-        throw badDataError
-      })
+      return fetchH2
+        .fetch(options.uri)
+        .then(response => response.text())
+        .then(text => {
+          if (text === fixtures[options.size]) {
+            return defer.resolve()
+          }
+          throw badDataError
+        })
+        .catch(err => {
+          throw err
+        })
     }
   })
 }

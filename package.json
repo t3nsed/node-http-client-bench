@@ -10,7 +10,7 @@
     "url": "github.com/fdesjardins"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=14"
   },
   "scripts": {
     "readme": "docker-compose up --build",
@@ -18,17 +18,18 @@
   },
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.27.2",
     "benchmark": "^2.1.4",
-    "got": "^9.6.0",
-    "isomorphic-fetch": "^2.2.1",
-    "ky": "^0.14.0",
-    "ky-universal": "^0.3.0",
-    "node-fetch": "^2.6.0",
-    "req-fast": "^0.2.18",
-    "request": "^2.88.0",
-    "superagent": "^5.1.0",
-    "text-table": "^0.2.0"
+    "got": "^11.8.3",
+    "isomorphic-fetch": "^3.0.0",
+    "ky": "^0.31.3",
+    "ky-universal": "^0.8.2",
+    "node-fetch": "^2.6.7",
+    "req-fast": "^0.2.21",
+    "superagent": "^8.0.0",
+    "text-table": "^0.2.0",
+    "undici": "^5.10.0",
+    "fetch-h2": "^3.0.2"
   },
   "devDependencies": {
     "standard": "^14.3.1"

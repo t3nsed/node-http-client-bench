@@ -15,6 +15,10 @@ const fetchH2 = require('fetch-h2')
 const badDataError = new Error('ERROR: incorrect data')
 
 const fixtures = {
+  1: fs.readFileSync(path.join(__dirname, 'fixtures/1K.txt')).toString(),
+  2: fs.readFileSync(path.join(__dirname, 'fixtures/2K.txt')).toString(),
+  4: fs.readFileSync(path.join(__dirname, 'fixtures/4K.txt')).toString(),
+  8: fs.readFileSync(path.join(__dirname, 'fixtures/8K.txt')).toString(),
   16: fs.readFileSync(path.join(__dirname, 'fixtures/16K.txt')).toString(),
   32: fs.readFileSync(path.join(__dirname, 'fixtures/32K.txt')).toString(),
   64: fs.readFileSync(path.join(__dirname, 'fixtures/64K.txt')).toString(),
@@ -281,9 +285,9 @@ const runBenchmarks = ({ downloadSizes }) => {
   })
 }
 
-if (!module.parent) {
+if (require.main === module) {
   const options = {
-    downloadSizes: [16, 32, 64, 256, 1024].map(s => {
+    downloadSizes: [2, 4, 8, 16, 32, 64, 256, 1024].map(s => {
       return {
         uri: `http://${process.env.NGINX}/${s}K.txt`,
         size: s

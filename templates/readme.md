@@ -12,6 +12,7 @@ These benchmarks use Nginx in a docker container to serve static files of severa
 - `superagent@8.0.0`
 - `isomorphic-fetch@3.0.0`
 - `node-fetch@2.6.7`
+- `node-fetch@3.2.10`
 - `undici@5.10.0`
 - `fetch-h2@3.0.2`
 

@@ -25,6 +25,7 @@
     "ky": "^0.31.3",
     "ky-universal": "^0.8.2",
     "node-fetch": "^2.6.7",
+    "node-fetch-latest": "npm:node-fetch@^3.2.10",
     "req-fast": "^0.2.21",
     "superagent": "^8.0.0",
     "text-table": "^0.2.0",

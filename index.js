@@ -6,6 +6,7 @@ const http = require('http')
 const axios = require('axios')
 const got = require('got')
 const nodeFetch = require('node-fetch')
+const nodeFetchLatest = (...args) => import('node-fetch-latest').then(({default: fetch}) => fetch(...args));
 const isomorphicFetch = require('isomorphic-fetch')
 const superagent = require('superagent')
 const { Agent } = require('http')
@@ -163,10 +164,27 @@ const addTestCases = (suite, options) => {
     }
   })
 
-  suite.add('nodeFetch', {
+  suite.add('nodeFetch (^2.6.7)', {
     defer: true,
     fn: defer => {
       return nodeFetch(options.uri)
+        .then(response => response.text())
+        .then(text => {
+          if (text === fixtures[options.size]) {
+            return defer.resolve()
+          }
+          throw badDataError
+        })
+        .catch(err => {
+          throw err
+        })
+    }
+  })
+
+  suite.add('nodeFetch (latest)', {
+    defer: true,
+    fn: defer => {
+      return nodeFetchLatest(options.uri)
         .then(response => response.text())
         .then(text => {
           if (text === fixtures[options.size]) {
